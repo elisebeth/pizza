@@ -1,6 +1,8 @@
 <template>
   <div class="app">
-    app
+    <div class="container">
+      <CommonSmallCard />
+    </div>
   </div>
 </template>
 
