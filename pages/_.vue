@@ -1,12 +1,10 @@
 <template>
-  <div class="app">
-    app
-  </div>
+  <div class="any">{{ $route.params }}</div>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
+  name: 'Any',
   layout: 'Default'
 }
 </script>
