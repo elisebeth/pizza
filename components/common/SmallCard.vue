@@ -11,7 +11,7 @@
 <script>
 export default {
   name: "CommonSmallCard",
-  props: ['item']
+  props: ['product']
 }
 </script>
 
