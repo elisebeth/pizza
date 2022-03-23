@@ -1,6 +1,10 @@
 <template>
   <div class="small-card">
-    <img src="../../assets/images/pizza.png" alt="pizza" class="small-card__icon">
+    <img
+      src="../../assets/images/pizza.png"
+      alt="pizza"
+      class="small-card__icon"
+    />
     <div class="small-card__content">
       <h2 class="small-card__title">Карбонара</h2>
       <span class="small-card__price">от 120</span>
@@ -10,8 +14,8 @@
 
 <script>
 export default {
-  name: "CommonSmallCard",
-  props: ['item']
+  name: 'CommonSmallCard',
+  props: ['product'],
 }
 </script>
 
@@ -31,7 +35,7 @@ export default {
     width 4.4375rem
     height 4.4375rem
     margin-right 1.5rem
-  
+
   &__content
     display flex
     flex-direction column
@@ -41,7 +45,7 @@ export default {
     font-size 1.125rem
     font-weight bold
     margin-bottom .25rem
-  
+
   &__price
     color #F7D22D
     font-weight 800
