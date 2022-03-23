@@ -22,10 +22,10 @@
       </div>
       <div class="header__wrapper">
         <nav class="header__navigation">
-          <nuxt-link v-for="(category, index) of categories" :key="index" :to="category.path" class="navigation__item" :class="{'active': currentCategory === index}" @click.native="switchCurrentCategory(index)">{{ category.name }}</nuxt-link>
+          <nuxt-link v-for="(category, index) of categories" :key="index" :to="'/category/' + category.path" class="navigation__item" :class="{'active': currentCategory === index}" @click.native="switchCurrentCategory(index)">{{ category.name }}</nuxt-link>
         </nav>
         <nuxt-link to="/login" class="header__link">Войти</nuxt-link>
-        <button class="header__cart">Корзина  |  {{ countCartItems }}</button>
+        <button class="header__cart" @click="$router.push('/cart')" >Корзина  |  {{ countCartItems }}</button>
       </div>
     </div>
   </header>
@@ -40,47 +40,47 @@ export default {
       categories: [
         {
           name: 'Пицца',
-          path: '/pizza'
+          path: 'pizza'
         },
         {
           name: 'Паста',
-          path: '/pasta'
+          path: 'pasta'
         },
         {
           name: 'Супы',
-          path: '/soup'
+          path: 'soup'
         },
         {
           name: 'Салаты',
-          path: '/salad'
+          path: 'salad'
         },
         {
           name: 'Напитки',
-          path: '/drink'
+          path: 'drink'
         },
         {
           name: 'Дессерты',
-          path: '/dessert'
+          path: 'dessert'
         },
         {
           name: 'Бакалея',
-          path: '/grocery'
+          path: 'grocery'
         },
         {
           name: 'Антипасты',
-          path: '/antipasta'
+          path: 'antipasta'
         },
         {
           name: 'Акции',
-          path: '/discounts'
+          path: 'discounts'
         },
         {
           name: 'Комбо',
-          path: '/combo'
+          path: 'combo'
         },
         {
           name: 'Контакты',
-          path: '/contact'
+          path: 'contact'
         }
       ],
 
