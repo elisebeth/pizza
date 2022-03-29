@@ -15,6 +15,7 @@
       </svg>
     </button>
     <div
+      ref="carousel"
       class="carousel"
       :style="{ transform: `translateX(-${currentTranslate})` }"
     >
@@ -22,7 +23,7 @@
         v-for="(item, index) of promotions"
         :key="index"
         ref="item"
-        :promotion="promotion"
+        :promotion="item"
         :class="{ opacity: index !== currentItem && index !== currentItem + 1 }"
       />
     </div>
@@ -45,6 +46,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
+
+const INTERVAL_TIME = 10000
+
 export default {
   name: 'CommonCarousel',
   props: ['promotion'],
@@ -66,19 +70,11 @@ export default {
         this.$refs.item[0].$el.getBoundingClientRect().width
     }, 100)
 
-    // setInterval(() => {
-    //   let value = 0
-    //   while (
-    //     this.currentItem + value > -1 &&
-    //     this.currentItem + value < this.promotions.length - 1
-    //   ) {
-    //     value += 1
-    //     this.slide(value)
-    //   }
-    //   if ((this.currentItem = this.promotions.length - 1)) {
-    //     this.currentItem = 0
-    //   }
-    // }, 1000)
+    this.resetInterval()
+  },
+
+  beforeDestroy() {
+    clearInterval(this.interval)
   },
 
   methods: {
@@ -91,9 +87,39 @@ export default {
       if (
         this.currentItem + value > -1 &&
         this.currentItem + value < this.promotions.length - 1
-      )
+      ) {
         this.currentItem += value
+        this.resetInterval()
+      } else if (this.currentItem + value === this.promotions.length - 1) {
+        this.$refs.carousel.style.transition = 'none'
+
+        this.currentItem = 0
+
+        setTimeout(() => {
+          this.$refs.carousel.style.transition = 'transform .4s linear'
+        }, 300)
+
+        this.resetInterval()
+      } else if (this.currentItem + value === -1) {
+        this.$refs.carousel.style.transition = 'none'
+
+        this.currentItem = this.promotions.length - 2
+
+        setTimeout(() => {
+          this.$refs.carousel.style.transition = 'transform .4s linear'
+        }, 300)
+
+        this.resetInterval()
+      }
       this.translate()
+    },
+
+    resetInterval() {
+      clearInterval(this.interval)
+
+      this.interval = setInterval(() => {
+        this.slide(1)
+      }, INTERVAL_TIME)
     },
   },
 }
