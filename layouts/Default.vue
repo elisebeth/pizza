@@ -1,7 +1,7 @@
 <template>
   <div class="default">
     <LayoutHeader />
-    <nuxt/>
+    <nuxt />
     <LayoutFooter />
   </div>
 </template>
@@ -11,3 +11,9 @@ export default {
   name: 'Default',
 }
 </script>
+
+<style lang="stylus" scoped>
+.default
+  width 100%
+  overflow hidden
+</style>

@@ -1,19 +1,19 @@
 <template>
-  <div class="list">
-    <CommonCard v-for="i in 26" :key="i" />
+  <div class="news">
+    <CommonSmallCard v-for="i in 4" :key="i" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CommonList',
+  name: 'CommonNewsList',
 }
 </script>
 
 <style lang="stylus" scoped>
-.list
+.news
   display grid
   grid-template-columns repeat(4, 1fr)
-  grid-row-gap 3rem
   grid-column-gap 2rem
+  margin-bottom 3rem
 </style>

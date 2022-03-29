@@ -73,10 +73,13 @@ export default {
   justify-content space-between
 .footer
   margin-bottom 4.5rem
+  margin-top 4.5rem
+  position relative
 
   &__wrapper
     display flex
     flex-direction column
+    z-index 999999
 
   &__title
     font-size 3rem
@@ -176,5 +179,5 @@ export default {
     position absolute
     bottom 0
     right 0
-    transform translateY(100%)
+    transform translateY(60%)
 </style>

@@ -28,7 +28,13 @@ export default {
   border-radius .75rem
 
   &:hover
-    box-shadow 0rem .25rem 1.5rem rgba(0, 0, 0, 0.06)
+    .card__image
+      transform translateY(.5rem)
+
+  &__image
+    height 15.8125rem
+    width 15.8125rem
+    transition transform .2s linear
 
   &-info
 
