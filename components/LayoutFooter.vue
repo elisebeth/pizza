@@ -35,7 +35,7 @@
               <img
                 :src="require(`../assets/icons/${icon}.svg`)"
                 alt=""
-                class="footer-socials__image"
+                class="footer-socials__icon"
               />
             </li>
           </ul>
@@ -68,12 +68,24 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@media screen and (max-width: 756px)
+  .footer
+    padding 4.5rem 2rem !important
+
+    &__wrapper:first-child
+      margin-bottom 2rem
+
+  .container
+    flex-direction column !important
+    align-items center
+
+
 .container
   display flex
   justify-content space-between
+
 .footer
-  margin-bottom 4.5rem
-  margin-top 4.5rem
+  padding 4.5rem 0
   position relative
 
   &__wrapper
@@ -106,7 +118,6 @@ export default {
       margin-right 1rem
 
   &-contacts
-
     &__title
       font-size 1rem
       font-weight bold
@@ -134,7 +145,6 @@ export default {
     font-weight 800
 
   &-socials
-
     &__title
       font-weight bold
       font-size 1rem
@@ -175,9 +185,14 @@ export default {
       font-size .875rem
       font-weight bold
 
+    &__icon
+      width 1.875rem
+      height 1.875rem
+
   &__logo
     position absolute
     bottom 0
     right 0
-    transform translateY(60%)
+    width 20rem
+    height 7.5rem
 </style>

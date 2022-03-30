@@ -11,6 +11,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@media screen and (max-width: 756px)
+  .news
+    padding 0 2rem
+
 .news
   display grid
   grid-template-columns repeat(4, 1fr)

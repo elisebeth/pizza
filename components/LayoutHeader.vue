@@ -30,6 +30,10 @@
         </div>
         <button class="header__button">Заказать звонок</button>
         <span class="header__number">8 499 391-84-49</span>
+        <button class="header__cart" @click="$router.push('/cart')">
+          Корзина | {{ countCartItems }}
+        </button>
+        <LayoutBurger class="burger" />
       </div>
       <div class="header__wrapper">
         <nav class="header__navigation">
@@ -121,11 +125,20 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@media screen and (max-width: 47.25rem)
+  .header__number
+    display none !important
+
+
 @media(max-width 72.5rem)
-  .container
-    display flex !important
+  .burger
+    display block !important
 
   .header
+    padding 1rem 2rem !important
+
+    &__wrapper:last-child
+      display none !important
 
     &__delivery
       display none !important
@@ -133,11 +146,16 @@ export default {
     &__button
       display none !important
 
-    &__navigation
-      display none !important
+    &__logo
+      margin-right auto !important
 
-    &__link
-      display none !important
+    &__number + .header__cart
+      display block !important
+      margin-left 1.5rem !important
+
+
+.burger
+  display none
 
 .mark
   &::before
@@ -237,6 +255,9 @@ export default {
     color #F7D22D
     font-weight bold
     font-size 1.625rem
+
+  &__number + .header__cart
+    display none
 
   &__navigation
     display flex

@@ -44,12 +44,13 @@
           </p>
         </li>
       </ul>
-      <script
-        type="text/javascript"
-        charset="utf-8"
-        async
-        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A75bda7b26d1abfbf8348854082cc41bcdaf6a7fbdf2972f2236834b16237d818&amp;width=1110&amp;height=322&amp;lang=ru_RU&amp;scroll=true"
-      ></script>
+      <iframe
+        src="https://yandex.ru/map-widget/v1/?um=constructor%3Aa1245a4f1c9037e1a4a710701278ba4de41933403a9338a22dec5f798cf7c74e&amp;source=constructor"
+        width="1110"
+        height="322"
+        frameborder="0"
+        class="map__constructor"
+      ></iframe>
     </div>
   </section>
 </template>
@@ -61,6 +62,30 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@media screen and (max-width: 756px)
+  .map
+    padding 4rem 2rem !important
+
+    &__advantages
+      flex-direction column !important
+      align-items center
+      padding 0 2rem
+
+      .advantages
+        &__item
+          width 100% !important
+          display flex
+          flex-direction column
+          align-items center
+
+          &:not(:last-child)
+            margin-bottom 2.5rem !important
+
+    &__constructor
+      width calc(100% - 4rem) !important
+
+
+
 .map
   width 100%
   background #E3ECF5
@@ -100,8 +125,8 @@ export default {
           transform translateX(-50%)
 
       &__content
-        font-size .875rem
-        max-width 13.5rem
+        font-size 10px
+        max-width 216px
         font-weight bold
         color #473E43
 
@@ -111,4 +136,10 @@ export default {
         margin-bottom .75rem
         width 3.25rem
         height 2.75rem
+
+
+  &__constructor
+    width 100%
+    height 20.125rem
+    border-radius 1rem
 </style>
