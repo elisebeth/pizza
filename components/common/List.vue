@@ -11,11 +11,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@media screen and (max-width: 756px) and (min-width: 416px)
+@media screen and (max-width: 768px) and (min-width: 512px)
   .list
     grid-template-columns repeat(3, 1fr) !important
 
-@media screen and (max-width: 416px)
+@media screen and (max-width: 512px)
   .list
     grid-template-columns repeat(2, 1fr) !important
 
