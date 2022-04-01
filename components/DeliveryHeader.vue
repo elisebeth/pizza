@@ -2,7 +2,12 @@
   <header class="header">
     <div class="container">
       <div class="header__wrapper">
-        <img src="../assets/icons/logo.svg" alt="" class="header__logo" />
+        <img
+          src="../assets/icons/logo.svg"
+          alt=""
+          class="header__logo"
+          @click="$router.push('/')"
+        />
         <div class="header-stages">
           <div class="header-stages__wrapper">
             <span class="header-stages__item">1</span
@@ -27,6 +32,9 @@ export default {
 .header
   padding 1rem 0
   border-bottom #ECECF1 .0625rem solid
+
+  &__logo
+    cursor pointer
 
   &__wrapper
     display flex

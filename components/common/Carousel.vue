@@ -69,7 +69,6 @@ export default {
       this.currentItemSize =
         this.$refs.item[0].$el.getBoundingClientRect().width
     }, 100)
-
     this.resetInterval()
   },
 
