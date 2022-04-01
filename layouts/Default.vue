@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .default
   width 100%
   overflow hidden

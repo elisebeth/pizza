@@ -11,9 +11,18 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@media screen and (max-width: 756px) and (min-width: 416px)
+  .list
+    grid-template-columns repeat(3, 1fr) !important
+
+@media screen and (max-width: 416px)
+  .list
+    grid-template-columns repeat(2, 1fr) !important
+
 .list
   display grid
   grid-template-columns repeat(4, 1fr)
   grid-row-gap 3rem
   grid-column-gap 2rem
+  justify-items center
 </style>

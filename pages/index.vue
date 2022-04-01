@@ -2,11 +2,11 @@
   <div class="app">
     <CommonCarousel :promotions="promotions" />
     <div class="container">
-      <h1 class="news__title">Новинки</h1>
+      <h1 class="news__title title">Новинки</h1>
       <CommonNewsList />
-      <h1 class="product__title">Пицца</h1>
+      <h1 class="products__title title">Пицца</h1>
       <CommonList />
-      <h1 class="promotions__title">Наши Акции</h1>
+      <h1 class="promotions__title title">Наши Акции</h1>
       <CommonPromotions />
     </div>
     <CommonMap />
@@ -36,6 +36,9 @@ export default {
 
 <style lang="stylus" scoped>
 
+@media screen and (max-width: 756px)
+  .title
+    padding-left 2rem
 
 .promotions__title
   color #F7D22D
@@ -49,7 +52,7 @@ export default {
   font-size 1.5rem
   margin-bottom 2rem
 
-.product__title
+.products__title
   color #F7D22D
   font-weight bold
   font-size 2rem

@@ -66,6 +66,7 @@ export default {
     &__cart
       color #231F20
       background-color #F7D22D
+      font-size .875rem
       padding .5rem 1.5rem
       border-radius 1.5rem
       border none
