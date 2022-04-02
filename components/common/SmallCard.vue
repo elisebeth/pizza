@@ -30,6 +30,8 @@ export default {
   justify-content center
   width 16rem
   cursor pointer
+  margin-right 3.08rem
+  transition all .4s
 
   &__icon
     width 4.4375rem

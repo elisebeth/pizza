@@ -1,7 +1,7 @@
 const cart = {
   state: {
     cartItems: [],
-    cartToppings: [],
+    cartToppings: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     cartSauces: [],
   },
   mutations: {
@@ -28,9 +28,9 @@ const cart = {
       commit('SET_CART_ITEMS', items)
     },
     changeItemValue() {},
-    async addTopping({ commit, state }, topping) {
+    addTopping({ commit, state }, topping) {
       const toppings = state.cartToppings
-      await this.$axios.$post('/cart', { id: topping.id, value: 1 })
+      // await this.$axios.$post('/cart', { id: topping.id, value: 1 })
       toppings.push(topping)
       commit('SET_CART_TOPPINGS', toppings)
     },
@@ -53,7 +53,9 @@ const cart = {
       commit('SET_CART_SAUCES', sauces)
     },
   },
-  getters: {},
+  getters: {
+    cartToppings: (state) => state.cartToppings,
+  },
 }
 
 export default cart

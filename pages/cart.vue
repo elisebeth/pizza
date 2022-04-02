@@ -2,25 +2,9 @@
   <section class="cart">
     <div class="container">
       <h1 class="cart__title">Корзина</h1>
-      <ul class="cart__list">
-        <li class="cart-item">
-          <img src="" alt="" class="cart-item__image" />
-          <div class="cart-item__wrapper">
-            <h2 class="cart-item__title">С креветками и трюфелями</h2>
-            <p class="cart-item__description">
-              Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное
-              масло, черный перец, пармезан.350 г
-            </p>
-          </div>
-          <span class="cart-item__price">120&#8381;</span>
-          <div class="cart-item__counter">
-            <button class="cart-item__button">-</button>
-            <span class="cart-item__count">{{}}</span>
-            <button class="cart-item__button">+</button>
-          </div>
-          <button class="cart-item__delete"></button>
-        </li>
-      </ul>
+      <CartList />
+      <h2 class="cart__toppings-title">Добавить к заказу?</h2>
+      <CommonSmallCarousel />
     </div>
   </section>
 </template>
@@ -33,6 +17,26 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@media screen and (max-width: 768px)
+  .cart
+    font-size 12px !important
+
 .container
   width 50rem
+
+.cart
+
+  &__title
+    color #F7D22D
+    font-size 2rem
+    font-weight 800
+    margin 2rem 0
+
+  &__toppings
+
+    &-title
+      font-size 1.5rem
+      font-weight bold
+      color #473E43
+      margin 2rem 0
 </style>

@@ -3,7 +3,7 @@
     <CommonCarousel :promotions="promotions" />
     <div class="container">
       <h1 class="news__title title">Новинки</h1>
-      <CommonNewsList />
+      <CommonSmallCarousel />
       <h1 class="products__title title">Пицца</h1>
       <CommonList />
       <h1 class="promotions__title title">Наши Акции</h1>
