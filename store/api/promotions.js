@@ -1,6 +1,6 @@
 const store = {
   state: {
-    promotions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    // promotions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   },
   mutations: {
     SET_PROMOTIONS(state, promotions) {

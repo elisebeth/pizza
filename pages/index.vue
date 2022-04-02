@@ -1,9 +1,23 @@
 <template>
   <div class="app">
-    <CommonCarousel :promotions="promotions" />
+    <CommonCarousel
+      :items="items"
+      :options="{
+        itemWidth: '540',
+        itemHeight: '312',
+        visibleRowSize: 2,
+      }"
+    />
     <div class="container">
       <h1 class="news__title title">Новинки</h1>
-      <CommonSmallCarousel />
+      <CommonCarousel
+        :items="smallCards"
+        :options="{
+          itemWidth: '255',
+          itemHeight: '99',
+          visibleRowSize: 4,
+        }"
+      />
       <h1 class="products__title title">Пицца</h1>
       <CommonList />
       <h1 class="promotions__title title">Наши Акции</h1>
@@ -22,7 +36,28 @@ export default {
 
   data() {
     return {
-      promotions: [],
+      items: [
+        'main_promotion',
+        'main_promotion',
+        'main_promotion',
+        'main_promotion',
+        'main_promotion',
+        'main_promotion',
+        'main_promotion',
+      ],
+
+      smallCards: [
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+      ],
     }
   },
 

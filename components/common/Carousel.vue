@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" :style="{ height: convertToRem(options.itemHeight) }">
     <button class="carousel__button" @click="slide(-1)">
       <svg
         width="9"
@@ -18,14 +18,20 @@
     <div
       ref="carousel"
       class="carousel"
-      :style="{ transform: `translateX(-${currentTranslate})` }"
+      :style="{
+        transform: `translateX(-${currentTranslate})`,
+      }"
     >
       <CommonCarouselItem
-        v-for="(item, index) of promotions"
+        v-for="(item, index) of items"
         :key="index"
         ref="item"
-        :promotion="item"
-        :class="{ opacity: index !== currentItem && index !== currentItem + 1 }"
+        :item="item"
+        :options="options"
+        :class="{
+          opacity: Math.abs(index - currentItem) > options.visibleRowSize,
+        }"
+        :style="{ minWidth: convertToRem(options.itemWidth) }"
       />
     </div>
     <button class="carousel__button" @click="slide(1)">
@@ -57,17 +63,16 @@ const DEFAULT_ITEM_SIZE = 540
 
 export default {
   name: 'CommonCarousel',
-  props: ['promotion'],
+  props: ['items', 'options'],
   data() {
     return {
       currentItem: 0,
       currentTranslate: 0,
-      currentItemSize: null,
     }
   },
 
   computed: {
-    ...mapGetters(['promotions']),
+    ...mapGetters(['']),
   },
 
   mounted() {
@@ -95,15 +100,15 @@ export default {
     slide(value) {
       if (
         this.currentItem + value > -1 &&
-        this.currentItem + value < this.promotions.length - 1
+        this.currentItem + value < this.items.length - 1
       ) {
         this.currentItem += value
         this.resetInterval()
-      } else if (this.currentItem + value === this.promotions.length - 1) {
+      } else if (this.currentItem + value === this.items.length - 1) {
         this.resetAnimation(0)
         this.resetInterval()
       } else if (this.currentItem + value === -1) {
-        this.resetAnimation(this.promotions.length - 2)
+        this.resetAnimation(this.items.length - 2)
         this.resetInterval()
       }
       this.translate()
@@ -139,7 +144,16 @@ export default {
     },
 
     size() {
-      return DEFAULT_ITEM_SIZE * this.difference()
+      return (
+        (!this.options.itemWidth ? DEFAULT_ITEM_SIZE : this.options.itemWidth) *
+        this.difference()
+      )
+    },
+
+    convertToRem(value) {
+      const size = parseInt(value)
+
+      return size / 16 + 'rem'
     },
   },
 }
@@ -163,7 +177,6 @@ export default {
 
 .container
   position relative
-  height 19.5rem
   margin-bottom 4rem
 
   ::-moz-scrollbar-width

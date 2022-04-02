@@ -4,7 +4,14 @@
       <h1 class="cart__title">Корзина</h1>
       <CartList />
       <h2 class="cart__toppings-title">Добавить к заказу?</h2>
-      <CommonSmallCarousel />
+      <CommonCarousel
+        :items="smallCards"
+        :options="{
+          itemWidth: '255',
+          itemHeight: '99',
+          visibleRowSize: 4,
+        }"
+      />
     </div>
   </section>
 </template>
@@ -13,6 +20,23 @@
 export default {
   name: 'Cart',
   layout: 'Delivery',
+
+  data() {
+    return {
+      smallCards: [
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+        'small-card',
+      ],
+    }
+  },
 }
 </script>
 

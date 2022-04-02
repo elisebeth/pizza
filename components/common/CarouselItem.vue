@@ -1,18 +1,32 @@
 <template>
-  <img src="../../assets/images/main_promotion.png" class="carousel-item" />
+  <img
+    :src="require(`../../assets/images/${item}.png`)"
+    class="carousel-item"
+    :style="{
+      width: convertToRem(options.itemWidth),
+      height: convertToRem(options.itemHeight),
+    }"
+  />
 </template>
 
 <script>
 export default {
   name: 'CommonCarouselItem',
-  props: ['promotion'],
+  props: ['item', 'options'],
+
+  methods: {
+    convertToRem(value) {
+      const size = parseInt(value)
+
+      return size / 16 + 'rem'
+    },
+  },
 }
 </script>
 
 <style lang="stylus" scoped>
 .carousel-item
-  width 33.75rem
-  height 19.5rem
   transition opacity .2s linear, transform .2s linear
   margin-right 2rem
+  cursor pointer
 </style>
