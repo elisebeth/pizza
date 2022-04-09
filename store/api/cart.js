@@ -1,8 +1,70 @@
+import { v4 as uuidv4 } from 'uuid'
+
 const cart = {
   state: {
-    cartItems: [],
+    cartItems: [
+      {
+        image: 1,
+        title: 'С креветками и трюфелями',
+        description:
+          'Домашняя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан.350 г',
+        price: 540,
+        value: 1,
+        id: uuidv4(),
+      },
+      {
+        image: 1,
+        title: 'С креветками и трюфелями',
+        description:
+          'Домашняя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан.350 г',
+        price: 540,
+        value: 1,
+        id: uuidv4(),
+      },
+      {
+        image: 1,
+        title: 'С креветками и трюфелями',
+        description:
+          'Домашняя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан.350 г',
+        price: 540,
+        value: 1,
+        id: uuidv4(),
+      },
+    ],
     cartToppings: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    cartSauces: [],
+    cartSouces: [
+      {
+        image: 1,
+        title: 'Сырный соус',
+        price: 120,
+      },
+      {
+        image: 2,
+        title: 'Барбекю',
+        price: 120,
+      },
+      {
+        image: 3,
+        title: 'Ранч',
+        price: 120,
+      },
+      {
+        image: 4,
+        title: 'Малиновое варенье',
+        price: 120,
+      },
+      {
+        image: 5,
+        title: 'Сгущенка',
+        price: 120,
+      },
+      {
+        image: 1,
+        title: 'Сырный соус',
+        price: 120,
+      },
+    ],
+    currentSouces: [],
   },
   mutations: {
     SET_CART_ITEMS(state, cartItems) {
@@ -11,19 +73,19 @@ const cart = {
     SET_CART_TOPPINGS(state, cartToppings) {
       state.cartToppings = cartToppings
     },
-    SET_CART_SAUCES(state, cartSauces) {
-      state.cartSauces = cartSauces
+    SET_CART_SOUCES(state, currentSouce) {
+      state.currentSouces = currentSouce
     },
   },
   actions: {
-    async addItem({ commit, state }, item) {
+    addItem({ commit, state }, item) {
       const items = state.cartItems
-      await this.$axios.$post('/cart', { id: item.id, value: 1 })
+      // await this.$axios.$post('/cart', { id: item.id, value: 1 })
       items.push(item)
       commit('SET_CART_ITEMS', items)
     },
-    async deleteItem({ commit, state }, item) {
-      await this.$axios.$delete(`/cart/${item.id}`)
+    deleteItem({ commit, state }, item) {
+      // await this.$axios.$delete(`/cart/${item.id}`)
       const items = state.cartItems.filter((elem) => elem.id !== item.id)
       commit('SET_CART_ITEMS', items)
     },
@@ -41,20 +103,23 @@ const cart = {
       )
       commit('SET_CART_TOPPINGS', toppings)
     },
-    async addSauce({ commit, state }, sauce) {
-      const sauces = state.cartSauces
-      await this.$axios.$post('/cart', { id: sauce.id, value: 1 })
-      sauces.push(sauce)
-      commit('SET_CART_SAUCES', sauces)
+    addSouces({ commit, state }, souce) {
+      const souces = state.currentSouces
+      // await this.$axios.$post('/cart', { id: souce.id, value: 1 })
+      souces.push(souce)
+      commit('SET_CART_SOUCES', souces)
     },
-    async deleteSauce({ commit, state }, sauce) {
-      await this.$axios.$delete(`/cart/${sauce.id}`)
-      const sauces = state.cartSauces.filter((elem) => elem.id !== sauce.id)
-      commit('SET_CART_SAUCES', sauces)
+    deleteSouce({ commit, state }, souce) {
+      // await this.$axios.$delete(`/cart/${souce.id}`)
+      const souces = state.currentSouces.filter((elem) => elem !== souce)
+      commit('SET_CART_SOUCES', souces)
     },
   },
   getters: {
+    cartItems: (state) => state.cartItems,
     cartToppings: (state) => state.cartToppings,
+    cartSouces: (state) => state.cartSouces,
+    currentSouces: (state) => state.currentSouces,
   },
 }
 

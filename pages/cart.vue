@@ -3,7 +3,7 @@
     <div class="container">
       <h1 class="cart__title">Корзина</h1>
       <CartList />
-      <h2 class="cart__toppings-title">Добавить к заказу?</h2>
+      <h2 class="cart__primary-title">Добавить к заказу?</h2>
       <CommonCarousel
         :items="smallCards"
         :options="{
@@ -12,6 +12,8 @@
           visibleRowSize: 4,
         }"
       />
+      <h2 class="cart__primary-title">Соусы к бортикам и закускам</h2>
+      <CartListSouces />
     </div>
   </section>
 </template>
@@ -46,9 +48,6 @@ export default {
   .cart
     font-size 12px !important
 
-.container
-  width 50rem
-
 .cart
 
   &__title
@@ -57,7 +56,7 @@ export default {
     font-weight 800
     margin 2rem 0
 
-  &__toppings
+  &__primary
 
     &-title
       font-size 1.5rem

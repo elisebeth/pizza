@@ -209,10 +209,10 @@ export default {
     justify-content center
 
     &:first-child
-      left -3rem
+      left -2rem
 
     &:last-child
-      right -3rem
+      right -2rem
 
     &--icon
       width 9px

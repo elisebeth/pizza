@@ -15,9 +15,14 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'CommonCard',
   props: ['product'],
+
+  methods: {
+    ...mapActions(['addItem']),
+  },
 }
 </script>
 

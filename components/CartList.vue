@@ -1,19 +1,18 @@
 <template>
   <ul class="cart__list">
-    <li v-for="index in 3" :key="index" class="cart-item">
+    <li v-for="(item, index) of cartItems" :key="index" class="cart-item">
       <img src="../assets/images/pizza.png" alt="" class="cart-item__image" />
       <div class="cart-item__wrapper">
-        <h2 class="cart-item__title">С креветками и трюфелями</h2>
+        <h2 class="cart-item__title">{{ item.title }}</h2>
         <p class="cart-item__description">
-          Домашняя паста феттуччине, сливочный соус, креветки, трюфельное масло,
-          черный перец, пармезан.350 г
+          {{ item.description }}
         </p>
       </div>
       <div class="cart-item__box">
-        <span class="cart-item__price">120&#8381;</span>
+        <span class="cart-item__price">{{ item.price }}&#8381;</span>
         <div class="cart-item__counter">
           <button class="cart-item__button">-</button>
-          <span class="cart-item__count">1</span>
+          <span class="cart-item__count">{{ item.value }}</span>
           <button class="cart-item__button">+</button>
         </div>
         <svg
@@ -23,6 +22,7 @@
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           class="cart-item__delete"
+          @click="deleteItem(item)"
         >
           <path d="M7 7L19 19" stroke="#696F7A" />
           <path d="M7 19L19 7" stroke="#696F7A" />
@@ -39,14 +39,23 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'CartList',
+  computed: {
+    ...mapGetters(['cartItems']),
+  },
+
+  methods: {
+    ...mapActions(['deleteItem']),
+  },
 }
 </script>
 
 <style lang="stylus" scoped>
 @media screen and (max-width: 768px)
   .cart
+
 
     &-item
       flex-direction column !important
@@ -91,6 +100,9 @@ export default {
   &__list
     border-top 1px solid #ECECF1
     border-bottom 1px solid #ECECF1
+    display flex
+    flex-direction column
+    align-items center
 
   &-item
     display flex
