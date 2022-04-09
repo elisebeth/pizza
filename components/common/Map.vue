@@ -84,8 +84,6 @@ export default {
     &__constructor
       width calc(100% - 4rem) !important
 
-
-
 .map
   width 100%
   background #E3ECF5

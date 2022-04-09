@@ -20,6 +20,7 @@
 export default {
   name: 'Cart',
   layout: 'Delivery',
+  middleware: ['auth'],
 
   data() {
     return {

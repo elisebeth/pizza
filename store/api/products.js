@@ -8,6 +8,14 @@ const store = {
     },
   },
   actions: {
+    async testAllProducts({ commit }) {
+      const products = (await this.$axios.get('product')).data
+
+      console.log(products)
+
+      commit('SET_PRODUCTS', products)
+    },
+
     async getProductsByCategory({ commit }, category) {
       const products = (await this.$axios.$get(category)).data
       commit('SET_PRODUCTS', products)

@@ -1,12 +1,28 @@
 <template>
   <div class="list">
-    <CommonCard v-for="i in 26" :key="i" />
+    <CommonCard
+      v-for="(product, index) of products"
+      :key="index"
+      :product="product"
+    />
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'CommonList',
+
+  computed: mapGetters(['products']),
+
+  created() {
+    this.testAllProducts()
+  },
+
+  methods: {
+    ...mapActions(['testAllProducts']),
+  },
 }
 </script>
 

@@ -2,13 +2,12 @@
   <div class="card">
     <img src="../../assets/images/big_pizza.png" alt="" class="card__image" />
     <section class="card-info">
-      <h2 class="card-info__title">С креветками и трюфелями</h2>
+      <h2 class="card-info__title">{{ product.title }}</h2>
       <p class="card-info__description">
-        Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло,
-        черный перец, пармезан.350 г
+        {{ product.description }}
       </p>
       <article class="card-info__cost">
-        <p class="card-info__price">от 600&#8381;</p>
+        <p class="card-info__price">{{ product.price }}&#8381;</p>
         <button class="card-info__cart">В корзину</button>
       </article>
     </section>
@@ -26,6 +25,10 @@ export default {
 .card
   cursor pointer
   border-radius .75rem
+  height 29rem
+  display flex
+  flex-direction column
+  align-items center
 
   &:hover
     .card__image
@@ -37,6 +40,9 @@ export default {
     transition transform .2s linear
 
   &-info
+    display flex
+    flex-direction column
+    height 100%
 
     &__title
       color #797979
@@ -56,7 +62,7 @@ export default {
       display flex
       justify-content space-between
       width 16rem
-      margin-top 1.5rem
+      margin-top auto
 
     &__price
       color #231F20
