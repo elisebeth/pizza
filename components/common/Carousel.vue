@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :style="{ height: convertToRem(options.itemHeight) }">
+  <div class="container" :style="{ height: convertToRem(itemHeight)}">
     <button class="carousel__button" @click="slide(-1)">
       <svg
         width="9"
@@ -29,10 +29,13 @@
         :item="item"
         :options="options"
         :class="{
-          opacity: Math.abs(index - currentItem) > options.visibleRowSize,
+          opacity: index > currentItem ? index - currentItem >= options.visibleRowSize : currentItem - index >= 1
         }"
-        :style="{ minWidth: convertToRem(options.itemWidth) }"
-      />
+      >
+        <template #carousel-item>
+          <component :is="options.component" :item="item"></component>
+        </template>
+      </CommonCarouselItem>
     </div>
     <button class="carousel__button" @click="slide(1)">
       <svg
@@ -53,13 +56,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex';
 
-const INTERVAL_TIME = 10000
-const DEFAULT_FONT_SIZE = 16
+const INTERVAL_TIME = 10000;
+const DEFAULT_FONT_SIZE = 16;
 
-const DEFAULT_MARGIN = 32
-const DEFAULT_ITEM_SIZE = 540
+const DEFAULT_MARGIN = 32;
 
 export default {
   name: 'CommonCarousel',
@@ -68,7 +70,9 @@ export default {
     return {
       currentItem: 0,
       currentTranslate: 0,
-    }
+      itemHeight: 0,
+      itemWidth: 0
+    };
   },
 
   computed: {
@@ -76,25 +80,31 @@ export default {
   },
 
   mounted() {
-    setTimeout(() => {
-      this.translate()
-    }, 200)
+    this.$nextTick(() => {
+      this.itemHeight = this.$refs.item[this.currentItem].$el.getBoundingClientRect().height;
+      this.itemWidth = this.$refs.item[this.currentItem].$el.getBoundingClientRect().width;
+      this.translate();
+    });
 
-    this.resetInterval()
+    this.resetInterval();
 
     window.addEventListener('resize', (event) => {
-      this.translate()
-    })
+      this.$nextTick(() => {
+        this.itemHeight = this.$refs.item[this.currentItem].$el.getBoundingClientRect().height;
+        this.itemWidth = this.$refs.item[this.currentItem].$el.getBoundingClientRect().width;
+      });
+      this.translate();
+    });
   },
 
   beforeDestroy() {
-    clearInterval(this.interval)
+    clearInterval(this.interval);
   },
 
   methods: {
     translate() {
       this.currentTranslate =
-        this.currentItem * (this.size() + this.translation()) + 'px'
+        this.currentItem * (this.itemWidth + this.translation()) + 'px';
     },
 
     slide(value) {
@@ -102,61 +112,54 @@ export default {
         this.currentItem + value > -1 &&
         this.currentItem + value < this.items.length - 1
       ) {
-        this.currentItem += value
-        this.resetInterval()
+        this.currentItem += value;
+        this.resetInterval();
       } else if (this.currentItem + value === this.items.length - 1) {
-        this.resetAnimation(0)
-        this.resetInterval()
+        this.resetAnimation(0);
+        this.resetInterval();
       } else if (this.currentItem + value === -1) {
-        this.resetAnimation(this.items.length - 2)
-        this.resetInterval()
+        this.resetAnimation(this.items.length - 2);
+        this.resetInterval();
       }
-      this.translate()
+      this.translate();
     },
 
     resetAnimation(value) {
-      this.$refs.carousel.style.transition = 'none'
-      this.currentItem = value
+      this.$refs.carousel.style.transition = 'none';
+      this.currentItem = value;
       setTimeout(() => {
-        this.$refs.carousel.style.transition = 'transform .4s linear'
-      }, 300)
+        this.$refs.carousel.style.transition = 'transform .4s linear';
+      }, 200);
     },
 
     resetInterval() {
-      clearInterval(this.interval)
+      clearInterval(this.interval);
 
       this.interval = setInterval(() => {
-        this.slide(1)
-      }, INTERVAL_TIME)
+        this.slide(1);
+      }, INTERVAL_TIME);
     },
 
     difference() {
-      const html = document.querySelector('html')
+      const html = document.querySelector('html');
       const fontSize = parseInt(
         window.getComputedStyle(html).getPropertyValue('font-size')
-      )
+      );
 
-      return fontSize / DEFAULT_FONT_SIZE
+      return fontSize / DEFAULT_FONT_SIZE;
     },
 
     translation() {
-      return DEFAULT_MARGIN * this.difference()
-    },
-
-    size() {
-      return (
-        (!this.options.itemWidth ? DEFAULT_ITEM_SIZE : this.options.itemWidth) *
-        this.difference()
-      )
+      return DEFAULT_MARGIN * this.difference();
     },
 
     convertToRem(value) {
-      const size = parseInt(value)
+      const size = parseInt(value);
 
-      return size / 16 + 'rem'
+      return size / this.difference() / 16 + 'rem';
     },
   },
-}
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -209,10 +212,10 @@ export default {
     justify-content center
 
     &:first-child
-      left -2rem
+      left -3rem
 
     &:last-child
-      right -2rem
+      right -3rem
 
     &--icon
       width 9px

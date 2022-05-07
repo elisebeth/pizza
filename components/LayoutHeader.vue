@@ -30,10 +30,17 @@
         </div>
         <button class="header__button">Заказать звонок</button>
         <span class="header__number">8 499 391-84-49</span>
-        <button class="header__cart" @click="$router.push('/cart')">
+        <button
+          class="header__cart"
+          @mouseover="isCartPreview = true"
+          @mouseleave="isCartPreview = false"
+          @click="$router.push('/cart')">
           Корзина | {{ countCartItems }}
+          <transition name="fade">
+            <CartPreview v-if="isCartPreview"/>
+          </transition>
         </button>
-        <LayoutBurger class="burger" />
+        <LayoutBurger class="burger"/>
       </div>
       <div class="header__wrapper">
         <nav class="header__navigation">
@@ -44,12 +51,20 @@
             class="navigation__item"
             :class="{ active: currentCategory === index }"
             @click.native="switchCurrentCategory(index)"
-            >{{ category.name }}</nuxt-link
+          >{{ category.name }}
+          </nuxt-link
           >
         </nav>
         <nuxt-link to="/login" class="header__link">Войти</nuxt-link>
-        <button class="header__cart" @click="$router.push('/cart')">
+        <button
+          class="header__cart"
+          @click="$router.push('/cart')"
+          @mouseover="isCartPreview = true"
+          @mouseleave="isCartPreview = false">
           Корзина | {{ countCartItems }}
+          <transition name="fade">
+            <CartPreview v-if="isCartPreview"/>
+          </transition>
         </button>
       </div>
     </div>
@@ -110,18 +125,20 @@ export default {
       ],
 
       markRate: 4.8,
-      deliveryTime: 31, // parameter is counting in minutes
+      deliveryTime: 666, // parameter is counting in minutes
       currentCategory: null,
       countCartItems: 10,
-    }
+
+      isCartPreview: false
+    };
   },
 
   methods: {
     switchCurrentCategory(index) {
-      this.currentCategory = index
+      this.currentCategory = index;
     },
   },
-}
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -130,7 +147,7 @@ export default {
     display none !important
 
 
-@media(max-width 72.5rem)
+@media (max-width 72.5rem)
   .burger
     display block !important
 
@@ -207,37 +224,37 @@ export default {
     margin-right auto
 
     .delivery
-        &__title
-          font-weight 600
-          font-size 1.0625rem
-          color #231F20
-          margin-bottom .5rem
+      &__title
+        font-weight 600
+        font-size 1.0625rem
+        color #231F20
+        margin-bottom .5rem
 
-        &__special
-          color #F7D22D
+      &__special
+        color #F7D22D
 
-        &__info
-          display flex
-          align-items center
-          list-style-type none
+      &__info
+        display flex
+        align-items center
+        list-style-type none
 
-          .info
-            &__item
-              display flex
-              align-items center
-              font-weight bold
-              font-size .8125rem
-              color #231F20
+        .info
+          &__item
+            display flex
+            align-items center
+            font-weight bold
+            font-size .8125rem
+            color #231F20
 
-              &:not(:last-child)
-                margin-right 1.25rem
+            &:not(:last-child)
+              margin-right 1.25rem
 
-            &__logo
-              margin-right .5rem
+          &__logo
+            margin-right .5rem
 
-            &__title
-              display flex
-              align-items center
+          &__title
+            display flex
+            align-items center
 
   &__button
     font-size .875rem
@@ -292,4 +309,11 @@ export default {
     border none
     cursor pointer
     white-space nowrap
+    position relative
+
+.fade-enter-active, .fade-leave-active
+  transition opacity .2s
+
+.fade-enter, .fade-leave-to
+  opacity 0
 </style>

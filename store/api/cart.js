@@ -70,6 +70,11 @@ const cart = {
     SET_CART_ITEMS(state, cartItems) {
       state.cartItems = cartItems
     },
+
+    DELETE_CART_ITEM(state, index) {
+      state.cartItems.splice(index, 1)
+    },
+
     SET_CART_TOPPINGS(state, cartToppings) {
       state.cartToppings = cartToppings
     },

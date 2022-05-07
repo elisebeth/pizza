@@ -77,7 +77,6 @@ export default {
 
   .container
     flex-direction column !important
-    align-items center
 
 
 .container

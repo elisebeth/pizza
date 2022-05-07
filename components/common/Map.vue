@@ -69,7 +69,6 @@ export default {
     &__advantages
       flex-direction column !important
       align-items center
-      padding 0 2rem
 
       .advantages
         &__item
@@ -82,7 +81,7 @@ export default {
             margin-bottom 2.5rem !important
 
     &__constructor
-      width calc(100% - 4rem) !important
+      width 100% !important
 
 .map
   width 100%

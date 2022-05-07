@@ -1,7 +1,7 @@
 <template>
-  <ul class="cart__list">
-    <li v-for="(item, index) of cartItems" :key="index" class="cart-item">
-      <img src="../assets/images/pizza.png" alt="" class="cart-item__image" />
+  <transition-group name="fade" tag="ul" class="cart__list">
+    <li v-for="(item, index) of cartItems" :key="index * 83" class="cart-item">
+      <img src="../assets/images/pizza.png" alt="" class="cart-item__image"/>
       <div class="cart-item__wrapper">
         <h2 class="cart-item__title">{{ item.title }}</h2>
         <p class="cart-item__description">
@@ -24,8 +24,8 @@
           class="cart-item__delete"
           @click="deleteItem(item)"
         >
-          <path d="M7 7L19 19" stroke="#696F7A" />
-          <path d="M7 19L19 7" stroke="#696F7A" />
+          <path d="M7 7L19 19" stroke="#696F7A"/>
+          <path d="M7 19L19 7" stroke="#696F7A"/>
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
@@ -35,28 +35,44 @@
         </svg>
       </div>
     </li>
-  </ul>
+  </transition-group>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import {mapGetters} from 'vuex';
+
 export default {
   name: 'CartList',
+
+  data() {
+    return {
+      items: []
+    };
+  },
+
   computed: {
     ...mapGetters(['cartItems']),
   },
 
-  methods: {
-    ...mapActions(['deleteItem']),
+  created() {
+    this.items = this.cartItems;
   },
-}
+
+  methods: {
+
+    deleteItem(item) {
+      const index = this.cartItems.indexOf(item);
+
+      this.$store.commit('DELETE_CART_ITEM', index);
+    }
+
+  },
+};
 </script>
 
 <style lang="stylus" scoped>
 @media screen and (max-width: 768px)
   .cart
-
-
     &-item
       flex-direction column !important
       align-items center !important
@@ -94,7 +110,6 @@ export default {
         font-size 1.75rem !important
 
 
-
 .cart
 
   &__list
@@ -105,8 +120,10 @@ export default {
     align-items center
 
   &-item
+    width 100%
     display flex
     padding 1.75rem 0
+    justify-content space-between
     align-items center
     border-bottom #ECECF1 .0625rem solid
 
@@ -172,4 +189,14 @@ export default {
     &__box
       display flex
       align-items center
+
+.fade-move, .fade-enter-active, .fade-leave-active
+  transition all 0.5s cubic-bezier(0.55, 0, 0.1, 1)
+
+.fade-enter-from, .fade-leave-to
+  opacity 0
+  transform scaleY(0.01) translate(30px, 0)
+
+.fade-leave-active
+  position absolute
 </style>

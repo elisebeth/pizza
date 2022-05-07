@@ -21,7 +21,7 @@
 <script>
 export default {
   name: 'CommonDiscoundCard',
-}
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -32,7 +32,10 @@ export default {
   transition box-shadow .2s linear
 
   &:hover
-    box-shadow  0px 4px 32px rgba(0, 0, 0, 0.20)
+    box-shadow 0px 4px 32px rgba(0, 0, 0, 0.20)
+
+  &__image
+    width 100%
 
   &__wrapper
     padding 1rem
@@ -58,4 +61,5 @@ export default {
     color #473E43
     font-weight bold
     font-size .875rem
+    cursor pointer
 </style>
