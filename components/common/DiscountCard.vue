@@ -55,7 +55,7 @@ export default {
   &__button
     outline none
     background #F7D22D
-    padding .5rem 2rem
+    padding 1rem 2rem
     border none
     border-radius .5rem
     color #473E43

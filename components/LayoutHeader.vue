@@ -34,13 +34,14 @@
           class="header__cart"
           @mouseover="isCartPreview = true"
           @mouseleave="isCartPreview = false"
-          @click="$router.push('/cart')">
+          @click="$router.push('/cart')"
+        >
           Корзина | {{ countCartItems }}
           <transition name="fade">
-            <CartPreview v-if="isCartPreview"/>
+            <CartPreview v-if="isCartPreview" />
           </transition>
         </button>
-        <LayoutBurger class="burger"/>
+        <LayoutBurger class="burger" />
       </div>
       <div class="header__wrapper">
         <nav class="header__navigation">
@@ -51,19 +52,22 @@
             class="navigation__item"
             :class="{ active: currentCategory === index }"
             @click.native="switchCurrentCategory(index)"
-          >{{ category.name }}
-          </nuxt-link
-          >
+            >{{ category.name }}
+          </nuxt-link>
         </nav>
-        <nuxt-link to="/login" class="header__link">Войти</nuxt-link>
+        <nuxt-link v-if="!token" to="/login" class="header__link"
+          >Войти</nuxt-link
+        >
+        <nuxt-link v-else to="/profile" class="header__link">Профиль</nuxt-link>
         <button
           class="header__cart"
           @click="$router.push('/cart')"
           @mouseover="isCartPreview = true"
-          @mouseleave="isCartPreview = false">
+          @mouseleave="isCartPreview = false"
+        >
           Корзина | {{ countCartItems }}
           <transition name="fade">
-            <CartPreview v-if="isCartPreview"/>
+            <CartPreview v-if="isCartPreview" />
           </transition>
         </button>
       </div>
@@ -72,6 +76,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'LayoutHeader',
 
@@ -127,18 +132,22 @@ export default {
       markRate: 4.8,
       deliveryTime: 666, // parameter is counting in minutes
       currentCategory: null,
-      countCartItems: 10,
+      // countCartItems: 10,
 
-      isCartPreview: false
-    };
+      isCartPreview: false,
+    }
+  },
+
+  computed: {
+    ...mapGetters(['token', 'countCartItems']),
   },
 
   methods: {
     switchCurrentCategory(index) {
-      this.currentCategory = index;
+      this.currentCategory = index
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

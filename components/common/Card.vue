@@ -1,14 +1,26 @@
 <template>
-  <div class="card">
+  <div class="card" :class="{ stretch: options.stretch }">
     <img src="../../assets/images/big_pizza.png" alt="" class="card__image" />
     <section class="card-info">
-      <h2 class="card-info__title">{{ product.title }}</h2>
-      <p class="card-info__description">
-        {{ product.description }}
-      </p>
+      <h2 class="card-info__title">{{ item.title }}</h2>
+      <p class="card-info__description">{{ item.description }} {{ item.id }}</p>
       <article class="card-info__cost">
-        <p class="card-info__price">{{ product.price }}&#8381;</p>
-        <button class="card-info__cart">В корзину</button>
+        <p class="card-info__price">{{ item.price }}&#8381;</p>
+        <button
+          v-show="!options.admin"
+          class="card-info__cart"
+          @click="addItem(item)"
+        >
+          В корзину
+        </button>
+
+        <button
+          v-show="options.admin"
+          class="card-info__button"
+          @click="deleteProductById(item.id)"
+        >
+          Удалить
+        </button>
       </article>
     </section>
   </div>
@@ -18,15 +30,41 @@
 import { mapActions } from 'vuex'
 export default {
   name: 'CommonCard',
-  props: ['product'],
+  props: ['product', 'params'],
+
+  data() {
+    return {
+      options: {},
+      item: {},
+    }
+  },
+
+  created() {
+    this.options = { ...this.params }
+    this.item = { ...this.product }
+  },
 
   methods: {
-    ...mapActions(['addItem']),
+    ...mapActions(['addItem', 'deleteProductById']),
   },
 }
 </script>
 
 <style lang="stylus" scoped>
+.stretch
+  width 100% !important
+  height auto !important
+  flex-direction row !important
+
+  &:not(:last-child)
+    margin-bottom 1.5rem
+
+  .card
+    &__image
+      margin-right 1rem
+      height 10rem !important
+      width 10rem !important
+
 .card
   cursor pointer
   border-radius .75rem
@@ -80,6 +118,15 @@ export default {
       font-size .875rem
       padding .5rem 1.5rem
       border-radius 1.5rem
+      border none
+      outline none
+      cursor pointer
+
+    &__button
+      font-size .875rem
+      padding .5rem 1.5rem
+      border-radius 1.5rem
+      color #231F20
       border none
       outline none
       cursor pointer

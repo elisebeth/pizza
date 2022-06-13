@@ -121,6 +121,7 @@ const cart = {
     },
   },
   getters: {
+    countCartItems: (state) => state.cartItems.length,
     cartItems: (state) => state.cartItems,
     cartToppings: (state) => state.cartToppings,
     cartSouces: (state) => state.cartSouces,

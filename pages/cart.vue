@@ -2,18 +2,18 @@
   <section class="cart">
     <div class="container">
       <h1 class="cart__title">Корзина</h1>
-      <CartList/>
+      <CartList />
       <h2 class="cart__primary-title">Добавить к заказу?</h2>
       <CommonCarousel
         :items="smallCards"
         :options="{
           component: 'CarouselSuggest',
           visibleRowSize: 4,
-          margin: 16
+          margin: 16,
         }"
       />
       <h2 class="cart__primary-title">Соусы к бортикам и закускам</h2>
-      <CartListSouces/>
+      <CartListSouces />
     </div>
   </section>
 </template>
@@ -22,7 +22,7 @@
 export default {
   name: 'Cart',
   layout: 'Delivery',
-  // middleware: ['auth'],
+  middleware: ['auth'],
 
   data() {
     return {
@@ -30,36 +30,42 @@ export default {
         {
           image: 'pizza',
           title: 'Pizza',
-          price: 2500
-        }, {
-          image: 'pizza',
-          title: 'Pizza',
-          price: 2500
-        }, {
-          image: 'pizza',
-          title: 'Pizza',
-          price: 2500
-        }, {
-          image: 'pizza',
-          title: 'Pizza',
-          price: 2500
-        }, {
-          image: 'pizza',
-          title: 'Pizza',
-          price: 2500
-        }, {
-          image: 'pizza',
-          title: 'Pizza',
-          price: 2500
-        }, {
-          image: 'pizza',
-          title: 'Pizza',
-          price: 2500
+          price: 2500,
         },
-      ]
-    };
+        {
+          image: 'pizza',
+          title: 'Pizza',
+          price: 2500,
+        },
+        {
+          image: 'pizza',
+          title: 'Pizza',
+          price: 2500,
+        },
+        {
+          image: 'pizza',
+          title: 'Pizza',
+          price: 2500,
+        },
+        {
+          image: 'pizza',
+          title: 'Pizza',
+          price: 2500,
+        },
+        {
+          image: 'pizza',
+          title: 'Pizza',
+          price: 2500,
+        },
+        {
+          image: 'pizza',
+          title: 'Pizza',
+          price: 2500,
+        },
+      ],
+    }
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>
